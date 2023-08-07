@@ -10,6 +10,7 @@ describe("home page", () => {
     cy.get('form').should('be.visible')
     cy.get('.name-input').should('be.visible')
     cy.get('button').should('have.length', 13)
+    cy.get('button').first().contains('beans')
     cy.get('button').last().contains('Submit Order')
   })
   it("should display orders", () => {
@@ -17,6 +18,6 @@ describe("home page", () => {
     cy.get('.order').first().contains('Pat Test')
     cy.get('.order').last().contains('Alex Test')
     cy.get(':nth-child(1) > .ingredient-list > :nth-child(1)').contains('beans')
+    cy.get(':nth-child(1) > .ingredient-list').children().should('have.length', 5)
   })
-
 });
