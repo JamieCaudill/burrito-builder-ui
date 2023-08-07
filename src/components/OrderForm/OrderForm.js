@@ -57,6 +57,7 @@ function OrderForm({orders, setOrders}) {
   return (
     <form>
       <input
+        className="name-input"
         type="text"
         placeholder="Name"
         name="name"
