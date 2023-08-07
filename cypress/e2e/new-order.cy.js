@@ -41,4 +41,11 @@ describe('new order', () => {
     cy.wait('@badPostOrder')
     cy.get('header > :nth-child(2)').should('have.text', 'Error posting order')
   })
+
+  it('should not allow user to add duplicate ingredients', () => {
+    cy.get('.name-input').type('Bill Test')
+    cy.get('[name="beans"]').click()
+    cy.get('[name="beans"]').click()
+    cy.get('p').should('have.text', 'Order: beans')
+  })
 })
