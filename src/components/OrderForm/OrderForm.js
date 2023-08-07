@@ -10,11 +10,13 @@ function OrderForm({setOrders}) {
       name: name,
       ingredients: ingredients,
     };
-    setOrders((orders) => [...orders, newOrder])
     clearInputs();
   }
 
   function clearInputs() {
+    if(!name || !ingredients.length) {
+      return alert("Please enter a name and at least one ingredient");
+    } 
     setName("");
     setIngredients([]);
   };
