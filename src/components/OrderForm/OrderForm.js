@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { postOrder } from "../../apiCalls";
+import Error from "../Error/Error";
 
 function OrderForm({orders, setOrders}) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
+  const [error, setError] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     if(!name || !ingredients.length) {
-      return alert("Please enter a name and at least one ingredient");
+      setError(true);
+      return;
     } 
     const newOrder = {
       id: orders.length + 1,
@@ -42,11 +45,13 @@ function OrderForm({orders, setOrders}) {
   const ingredientButtons = possibleIngredients.map((ingredient, index) => {
     return (
       <button
+        className='ingredient-btn'
         key={ingredient}
         name={ingredient}
         onClick={(e) => {
           e.preventDefault();
-          (setIngredients([...ingredients, ingredient]))
+          setError(false)
+          setIngredients([...ingredients, ingredient])
         }}
       >
         {ingredient}
@@ -67,9 +72,11 @@ function OrderForm({orders, setOrders}) {
 
       {ingredientButtons}
 
+      {error && <Error />}
+
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
 
-      <button onClick={(e) => handleSubmit(e)}>Submit Order</button>
+      <button className='submit-btn' onClick={(e) => handleSubmit(e)}>Submit Order</button>
     </form>
   );
 }
