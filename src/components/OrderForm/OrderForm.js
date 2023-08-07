@@ -2,15 +2,15 @@ import { useState } from "react";
 import { postOrder } from "../../apiCalls";
 import Error from "../Error/Error";
 
-function OrderForm({orders, setOrders}) {
+function OrderForm({orders, setOrders, setError}) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [error, setError] = useState(false);
+  const [formError, setFormError] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     if(!name || !ingredients.length) {
-      setError(true);
+      setFormError(true);
       return;
     } 
     const newOrder = {
@@ -18,7 +18,9 @@ function OrderForm({orders, setOrders}) {
       name: name,
       ingredients: ingredients,
     };
-    postOrder(newOrder).then(data => setOrders((orders) => [...orders, data]))
+    postOrder(newOrder)
+      .then(data => setOrders((orders) => [...orders, data]))
+      .catch(err => setError(err.message));
     clearInputs();
   }
 
@@ -50,7 +52,7 @@ function OrderForm({orders, setOrders}) {
         name={ingredient}
         onClick={(e) => {
           e.preventDefault();
-          setError(false)
+          setFormError(false)
           setIngredients([...ingredients, ingredient])
         }}
       >
@@ -72,7 +74,7 @@ function OrderForm({orders, setOrders}) {
 
       {ingredientButtons}
 
-      {error && <Error />}
+      {formError && <Error />}
 
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
 

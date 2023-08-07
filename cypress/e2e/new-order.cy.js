@@ -8,6 +8,9 @@ describe('new order', () => {
     },
     {id: 4, name: 'Bill Test', ingredients: ['beans', 'lettuce']}).as('postOrder')
   })
+    cy.intercept('POST', 'http://localhost:3001/api/v1/orders', {
+      statusCode: 500,
+    }).as('badPost')
   it('should show a message if no ingredients are selected', () => {
     cy.get('p').should('have.text', 'Order: Nothing selected')
   })

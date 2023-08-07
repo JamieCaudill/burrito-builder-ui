@@ -3,21 +3,24 @@ import "./App.css";
 import { getOrders } from "../../apiCalls";
 import Orders from "../../components/Orders/Orders";
 import OrderForm from "../../components/OrderForm/OrderForm";
+import Error from "../../components/Error/Error";
 
 function App() {
   const [orders, setOrders] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     getOrders()
       .then((data) => setOrders(data.orders))
-      .catch((err) => console.error("Error fetching:", err));
+      .catch((err) => setError("Error fetching data:", err));
   }, []);
 
   return (
     <main className="App">
       <header>
         <h1>Burrito Builder</h1>
-        <OrderForm setOrders={setOrders} orders={orders}/>
+        {error && <p>{error}</p>}
+        <OrderForm setOrders={setOrders} orders={orders} setError={setError}/>
       </header>
 
       <Orders orders={orders} />
