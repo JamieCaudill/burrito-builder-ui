@@ -51,7 +51,7 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        // onChange={(e) => }
+        onChange={(e) => setName(e.target.value)}
       />
 
       {ingredientButtons}
