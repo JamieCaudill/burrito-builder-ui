@@ -24,6 +24,14 @@ function OrderForm({orders, setOrders, setError}) {
     clearInputs();
   }
 
+  function handleClick(ingredient) {
+    setFormError(false)
+    if (ingredients.includes(ingredient)) {
+      return;
+    }
+    setIngredients([...ingredients, ingredient])
+  }
+
   function clearInputs() {
     setName("");
     setIngredients([]);
@@ -52,8 +60,7 @@ function OrderForm({orders, setOrders, setError}) {
         name={ingredient}
         onClick={(e) => {
           e.preventDefault();
-          setFormError(false)
-          setIngredients([...ingredients, ingredient])
+          handleClick(ingredient)
         }}
       >
         {ingredient}
