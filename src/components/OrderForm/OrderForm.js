@@ -1,22 +1,25 @@
 import { useState } from "react";
+import { postOrder } from "../../apiCalls";
 
-function OrderForm({setOrders}) {
+function OrderForm({orders, setOrders}) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
+    if(!name || !ingredients.length) {
+      return alert("Please enter a name and at least one ingredient");
+    } 
     const newOrder = {
+      id: orders.length + 1,
       name: name,
       ingredients: ingredients,
     };
+    postOrder(newOrder).then(data => setOrders((orders) => [...orders, data]))
     clearInputs();
   }
 
   function clearInputs() {
-    if(!name || !ingredients.length) {
-      return alert("Please enter a name and at least one ingredient");
-    } 
     setName("");
     setIngredients([]);
   };
@@ -36,7 +39,7 @@ function OrderForm({setOrders}) {
     "sour cream",
   ];
 
-  const ingredientButtons = possibleIngredients.map((ingredient) => {
+  const ingredientButtons = possibleIngredients.map((ingredient, index) => {
     return (
       <button
         key={ingredient}

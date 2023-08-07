@@ -15,7 +15,7 @@ Be sure to setup the [backend repo for Burrito Builder](https://github.com/turin
 
 ### Iteration 1
 
-Right now the app won't load because its unfinished/buggy. Run the dev server and fix whatever bugs/finish whatever functionality is causing the app to crash. 
+Right now the app won't load because its unfinished/buggy. Run the dev server and fix whatever bugs/finish whatever functionality is causing the app to crash.
 
 ### Iteration 2
 
@@ -34,7 +34,6 @@ Cypress testing: Be sure to stub all network requests:
 - Write a test covering what should be displayed when the user first visits the page.
 - Write a test to check the user flow of adding a new order to the DOM.
 - Write a test to check that orders cannot be submitted without a name and at least one ingredient.
-
 
 ## Extensions (only to be attempted if all prior iterations are complete)
 
