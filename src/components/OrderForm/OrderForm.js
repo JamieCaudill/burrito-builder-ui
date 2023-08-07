@@ -28,12 +28,16 @@ function OrderForm(props) {
     "cilantro",
     "sour cream",
   ];
+
   const ingredientButtons = possibleIngredients.map((ingredient) => {
     return (
       <button
         key={ingredient}
         name={ingredient}
-        // onClick={(e) => }
+        onClick={(e) => {
+          e.preventDefault();
+          (setIngredients([...ingredients, ingredient]))
+        }}
       >
         {ingredient}
       </button>

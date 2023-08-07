@@ -7,7 +7,7 @@ import OrderForm from "../../components/OrderForm/OrderForm";
 function App() {
   useEffect(() => {
     getOrders().catch((err) => console.error("Error fetching:", err));
-  });
+  }, []);
 
   return (
     <main className="App">
@@ -16,7 +16,7 @@ function App() {
         <OrderForm />
       </header>
 
-      <Orders orders={"Here is where orders go"} />
+      {/* <Orders orders={"Here is where orders go"} /> */}
     </main>
   );
 }
